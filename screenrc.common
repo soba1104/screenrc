@@ -1,0 +1,11 @@
+# vim:set ft=screen:
+
+escape \233\233
+zombie
+hardstatus off
+multiuser off
+idle off
+vbell off
+autodetach on
+defscrollback 0
+chdir $HOME/.screen

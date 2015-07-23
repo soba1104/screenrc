@@ -1,0 +1,8 @@
+# vim:set ft=screen:
+
+source screenrc.common
+
+backtick 0 0 10 ruby backtick.0
+caption always "%0`"
+
+screen screen -qUmc screenrc.leaf

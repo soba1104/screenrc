@@ -1,0 +1,7 @@
+# vim:set ft=screen:
+
+source screenrc.common
+
+escape ^a^a
+
+screen screen -qUmc screenrc.0
