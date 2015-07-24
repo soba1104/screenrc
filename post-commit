@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'git'
+
+def cd()
+  return true if File.exist?('.git')
+  d0 = Dir.pwd
+  Dir.chdir('..')
+  d1 = Dir.pwd
+  return false if d0 == d1
+  cd()
+end
+return unless cd()
+
+git = Git.open('.')
+diff = git.diff('HEAD^')
+add = diff.insertions
+del = diff.deletions
+name = File.basename(Dir.pwd)
+File.open(File.expand_path('~/.screen/activity.csv'), 'a') do |f|
+  f.puts("#{Time.now.to_i},#{name},#{add},#{del}")
+end

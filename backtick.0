@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
 
-puts Time.now.to_s
+require 'date'
+require 'csv'
+
+def fmt(time, acts)
+  t = time.strftime('%Y-%m-%d %H:%M:%S')
+  "#{t}: #{acts.join(',')}"
+end
+
+today = Date.today.to_time
+now = Time.now
+acts = []
+begin
+  adds = Hash.new(0)
+  dels = Hash.new(0)
+  CSV.foreach('activity.csv') do |row|
+    time = Time.at(row[0].to_i)
+    next unless time < today
+    name = row[1].to_i
+    adds[name] += row[2].to_i
+    dels[name] += row[3].to_i
+  end
+  total_add = adds.inject(0){|t, (n, a)| t + a}
+  total_del = dels.inject(0){|t, (n, d)| t + d}
+  acts << "total(#{total_add}, #{total_del})"
+rescue Exception => e
+  STDERR.puts e.backtrace
+end
+puts fmt(now, acts)
