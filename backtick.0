@@ -16,7 +16,7 @@ begin
   dels = Hash.new(0)
   CSV.foreach('activity.csv') do |row|
     time = Time.at(row[0].to_i)
-    next unless time < today
+    next unless time >= today
     name = row[1].to_i
     adds[name] += row[2].to_i
     dels[name] += row[3].to_i
