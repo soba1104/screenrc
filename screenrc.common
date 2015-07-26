@@ -1,6 +1,6 @@
 # vim:set ft=screen:
 
-escape \233\233
+escape ^t^t
 zombie
 hardstatus off
 multiuser off
